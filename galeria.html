@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria – Pomoc Drogowa 24/7 Kacper Kempa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a12;
+      --ivory: #fafaf8;
+      --green: #eab308;
+      --green-mid: #facc15;
+      --green-light: #fef08a;
+      --silver: #9ca3af;
+      --card-bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--ink);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    }
+    nav .nav-link { color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
+    nav .nav-link.active { color: var(--green); }
+    nav .nav-link:hover { color: #fff; }
+    nav.scrolled .nav-link { color: var(--ink); font-weight: 600; }
+    nav.scrolled .nav-link.active { color: var(--green); }
+    nav.scrolled .nav-link:hover { color: var(--green); }
+    nav.scrolled .hamburger span { background: var(--ink); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 16px 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.45);
+    }
+    
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #mobile-menu a:hover, #mobile-menu a.active { color: #4ade80; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ivory); }
+    ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+    
+    footer { background: var(--ink); }
+  </style>
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="px-6 py-2.5 md:py-3.5">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="block">
+        <img src="logo.png" alt="Pomoc Drogowa" class="h-10 md:h-[50px] w-auto object-contain transition-all duration-300" id="nav-logo" />
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html#o-nas" class="nav-link text-sm font-medium">O firmie</a>
+        <a href="index.html#cennik" class="nav-link text-sm font-medium">Cennik</a>
+        <a href="galeria.html" class="nav-link text-sm font-medium active">Galeria</a>
+        <a href="index.html#kontakt" class="nav-link text-sm font-medium">Kontakt</a>
+        <a href="tel:669146798" class="btn-primary py-2.5 px-6 text-sm">Zadzwoń po pomoc →</a>
+      </div>
+      <button id="ham-btn" class="md:hidden hamburger flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu">
+    <a href="index.html#o-nas" class="mobile-link">O firmie</a>
+    <a href="index.html#cennik" class="mobile-link">Cennik</a>
+    <a href="galeria.html" class="mobile-link active">Galeria</a>
+    <a href="index.html#kontakt" class="mobile-link">Kontakt</a>
+    <a href="tel:669146798" class="btn-primary mt-4">Zadzwoń po pomoc →</a>
+  </div>
+
+  <!-- GALLERY HEADER -->
+  <section class="pt-36 pb-16 px-6">
+    <div class="max-w-6xl mx-auto text-center reveal">
+      <p class="section-eyebrow mb-4">Nasza Flota i Sprzęt</p>
+      <h1 class="font-display text-5xl md:text-6xl leading-none">
+        GALERIA <span style="color: var(--green);">ZDJĘĆ</span>
+      </h1>
+      <p class="text-gray-600 mt-5 max-w-2xl mx-auto">Zobacz, jak wygląda nasza autolaweta w akcji oraz poznaj nasz sprzęt gotowy do niesienia pomocy na drodze.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY GRID -->
+  <section class="pb-28 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div class="rounded-2xl overflow-hidden shadow-lg reveal group" style="border: 1px solid rgba(0,0,0,0.05);">
+          <img src="galeria/1.png" alt="Zdjęcie 1" class="w-full h-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-lg reveal reveal-delay-1 group" style="border: 1px solid rgba(0,0,0,0.05);">
+          <img src="galeria/2.png" alt="Zdjęcie 2" class="w-full h-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-lg reveal reveal-delay-2 group" style="border: 1px solid rgba(0,0,0,0.05);">
+          <img src="galeria/3.png" alt="Zdjęcie 3" class="w-full h-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-lg reveal reveal-delay-3 group" style="border: 1px solid rgba(0,0,0,0.05);">
+          <img src="galeria/4.png" alt="Zdjęcie 4" class="w-full h-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center">
+          <img src="logo.png" alt="Pomoc Drogowa" class="h-8 w-auto" />
+        </div>
+        <p class="text-sm" style="color: rgba(255,255,255,0.35);">© 2025 Pomoc Drogowa Kacper Kempa. Wszelkie prawa zastrzeżone.</p>
+        <div class="flex gap-6">
+          <a href="index.html#o-nas" class="text-sm hover:text-white transition-colors" style="color: rgba(255,255,255,0.45);">O firmie</a>
+          <a href="index.html#cennik" class="text-sm hover:text-white transition-colors" style="color: rgba(255,255,255,0.45);">Cennik</a>
+          <a href="index.html#kontakt" class="text-sm hover:text-white transition-colors" style="color: rgba(255,255,255,0.45);">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    const hamBtn = document.getElementById('ham-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    document.querySelectorAll('.hamburger, .mobile-link').forEach(btn => {
+      btn.addEventListener('click', () => {
+        hamBtn.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        if(btn.classList.contains('mobile-link')){
+            hamBtn.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        }
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      });
+    });
+    
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

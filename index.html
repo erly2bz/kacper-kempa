@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomoc Drogowa 24/7 Kacper Kempa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a12;
+      --ivory: #fafaf8;
+      --green: #eab308;
+      --green-mid: #facc15;
+      --green-light: #fef08a;
+      --silver: #9ca3af;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ── */
+    .font-display {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    nav .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.3s;
+    }
+
+    nav .nav-link:hover {
+      color: #fff;
+    }
+
+    nav.scrolled .nav-link {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav.scrolled .nav-link:hover {
+      color: var(--green);
+    }
+
+    nav.scrolled .hamburger span {
+      background: var(--ink);
+    }
+
+    /* ── Hero ── */
+    .hero-bg {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(234, 179, 8, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.6), transparent);
+    }
+
+    /* ── Badge pill ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(234, 179, 8, 0.15);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      color: #fde047;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+
+    /* ── Gradient text ── */
+    .grad-text {
+      background: linear-gradient(135deg, #fff 30%, #fde047 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── CTA button ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 16px 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(234, 179, 8, 0.45);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 16px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    /* ── Trust bar ── */
+    .trust-bar {
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 28px 0;
+    }
+
+    .trust-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Section headings ── */
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    /* ── Cards ── */
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 24px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .pricing-card.featured {
+      background: var(--ink);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .pricing-card.featured .check-icon {
+      color: #fde047;
+    }
+
+    .pricing-card.featured .feature-text {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .pricing-card.featured .price-sub {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .pricing-card.fast {
+      border-color: var(--green);
+      box-shadow: 0 0 0 1px var(--green), inset 0 0 60px rgba(234, 179, 8, 0.04);
+    }
+
+    .card-glow {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(234, 179, 8, 0.18);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .check-icon {
+      color: var(--green);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+    }
+
+    /* ── Map section ── */
+    .map-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(234, 179, 8, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
+      }
+    }
+
+    .animate-fade-up {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.22s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.36s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-5 {
+      animation-delay: 0.64s;
+    }
+
+    .pulse-btn {
+      animation: pulse-ring 2.4s ease infinite;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* ── Hamburger ── */
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    #mobile-menu.open {
+      display: flex;
+    }
+
+    #mobile-menu a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    #mobile-menu a:hover {
+      color: #fde047;
+    }
+
+    /* ── Number ticker ── */
+    .ticker {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--green);
+    }
+
+    /* ── Stat cards ── */
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--ivory);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+  <nav id="navbar" class="px-6 py-2.5 md:py-3.5">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#" class="block">
+        <img src="logo.png" alt="Pomoc Drogowa"
+          class="h-10 md:h-[50px] w-auto object-contain transition-all duration-300" id="nav-logo" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#o-nas" class="nav-link text-sm font-medium">O firmie</a>
+        <a href="#cennik" class="nav-link text-sm font-medium">Cennik</a>
+        <a href="galeria.html" class="nav-link text-sm font-medium">Galeria</a>
+        <a href="#kontakt" class="nav-link text-sm font-medium">Kontakt</a>
+        <a href="tel:669146798" class="btn-primary py-2.5 px-6 text-sm">Zadzwoń po pomoc →</a>
+      </div>
+
+      <!-- Hamburger -->
+      <button id="ham-btn" class="md:hidden hamburger flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu">
+    <a href="#o-nas" class="mobile-link">O firmie</a>
+    <a href="#cennik" class="mobile-link">Cennik</a>
+    <a href="galeria.html" class="mobile-link">Galeria</a>
+    <a href="#kontakt" class="mobile-link">Kontakt</a>
+    <a href="tel:669146798" class="btn-primary mt-4">Zadzwoń po pomoc →</a>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+  <section class="hero-bg min-h-screen flex items-center pt-24 pb-20 px-6 relative">
+    <div class="hero-line"></div>
+
+    <!-- Background number watermark -->
+    <div
+      class="absolute right-0 top-1/2 -translate-y-1/2 font-display text-[22vw] leading-none select-none pointer-events-none"
+      style="color: rgba(255,255,255,0.025);">B</div>
+
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left column -->
+        <div>
+          <div class="badge animate-fade-up delay-1 mb-6">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="#fde047">
+              <circle cx="4" cy="4" r="4" />
+            </svg>
+            Pomoc Drogowa 24/7 Kacper Kempa
+          </div>
+
+          <h1 class="font-display animate-fade-up delay-2"
+            style="font-size: clamp(3.4rem, 7vw, 6rem); line-height: 0.95; color: #fff;">
+            SZYBKA<br />
+            <span class="grad-text">POMOC</span><br />
+            NA DRODZE
+          </h1>
+
+          <p class="animate-fade-up delay-3 mt-6 text-lg leading-relaxed"
+            style="color: rgba(255,255,255,0.6); max-width: 420px;">
+            Błyskawiczny dojazd na miejsce zdarzenia, bezpieczne holowanie autolawetą, wyciąganie z rowu i awaryjne
+            uruchamianie pojazdów na terenie Krasnego i okolic przez całą dobę.
+          </p>
+
+          <div class="animate-fade-up delay-4 flex flex-wrap gap-4 mt-10">
+            <a href="tel:669146798" class="btn-primary pulse-btn">
+              Zadzwoń po pomoc
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <a href="#cennik" class="btn-ghost">
+              Cennik usług
+            </a>
+          </div>
+
+          <!-- Quick trust -->
+          <div class="animate-fade-up delay-5 flex items-center gap-6 mt-12">
+            <div class="flex -space-x-2">
+              <div
+                class="w-8 h-8 rounded-full border-2 border-gray-900 flex items-center justify-center text-xs font-bold"
+                style="background: #facc15; color:#fff;">K</div>
+              <div
+                class="w-8 h-8 rounded-full border-2 border-gray-900 flex items-center justify-center text-xs font-bold"
+                style="background: #eab308; color:#fff;">A</div>
+              <div
+                class="w-8 h-8 rounded-full border-2 border-gray-900 flex items-center justify-center text-xs font-bold"
+                style="background: #facc15; color:#fff;">M</div>
+            </div>
+            <p class="text-sm" style="color: rgba(255,255,255,0.55);">Zaufało nam <strong style="color:#fde047;">setki
+                kierowców</strong> w potrzebie</p>
+          </div>
+        </div>
+
+        <!-- Right column — Stat card stack -->
+        <div class="hidden lg:flex flex-col gap-4 animate-fade-up delay-3">
+          <div class="rounded-2xl p-6 flex items-center gap-5"
+            style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(8px);">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style="background: rgba(234,179,8,0.25);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-display text-3xl" style="color:#fde047;">DOJAZD</p>
+              <p class="text-sm" style="color:rgba(255,255,255,0.55);">Szybki dojazd na miejsce zdarzenia</p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-6 flex items-center gap-5"
+            style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(8px);">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style="background: rgba(234,179,8,0.25);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-display text-3xl" style="color:#fde047;">24 / 7</p>
+              <p class="text-sm" style="color:rgba(255,255,255,0.55);">Dostępność usług przez całą dobę</p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-6 flex items-center gap-5"
+            style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(8px);">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style="background: rgba(234,179,8,0.25);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 00-4 0v2" />
+                <path d="M8 7V5a2 2 0 014 0" />
+                <line x1="12" y1="12" x2="12" y2="16" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-display text-3xl" style="color:#fde047;">LAWETA</p>
+              <p class="text-sm" style="color:rgba(255,255,255,0.55);">Bezpieczny transport Twojego pojazdu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     TRUST BAR
+════════════════════════════════════════════ -->
+  <section class="trust-bar bg-white px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+
+      <div class="trust-item reveal px-8">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-base">Zdawalność 80,64%</p>
+          <p class="text-sm text-gray-500 mt-0.5">Powyżej średniej krajowej</p>
+        </div>
+      </div>
+
+      <div class="trust-item reveal reveal-delay-2 px-8">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 7V5a2 2 0 00-4 0v2" />
+            <path d="M8 7V5a2 2 0 014 0" />
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-base">Bezpieczny transport</p>
+          <p class="text-sm text-gray-500 mt-0.5">Hyundai i20 – nauka w komforcie</p>
+        </div>
+      </div>
+
+      <div class="trust-item reveal reveal-delay-3 px-8">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-base">Szybki dojazd</p>
+          <p class="text-sm text-gray-500 mt-0.5">Instruktor przyjedzie pod Twój dom</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     O NAS
+════════════════════════════════════════════ -->
+  <section id="o-nas" class="py-28 px-6" style="background: var(--ivory);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Text -->
+        <div class="reveal">
+          <p class="section-eyebrow mb-4">O firmie</p>
+          <h2 class="font-display text-5xl md:text-6xl leading-none mb-6">
+            POMOC DROGOWA<br /><span style="color: var(--green);">NA CZAS</span>
+          </h2>
+          <p class="text-gray-600 leading-relaxed text-lg mb-5">
+            Firma <strong>Pomoc Drogowa 24/7 Kacper Kempa</strong> działa w miejscowości Krasne, oferując szybką pomoc
+            dla kierowców z całego
+            regionu. Od lat sprawnie holujemy auta — pewnie, bezpiecznie
+            i&nbsp;bez przerywania Twojej podróży na dłużej, niż jest to konieczne.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-lg mb-8">
+            Nasza autolaweta stawi się na miejscu zdarzenia w trybie ekspresowym, a wykwalifikowani kierowcy zadbają o
+            prawidłowy załadunek i transport we wskazane miejsce.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full"
+              style="background: var(--green-light); color: var(--green);">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Holowanie autolawetą
+            </span>
+            <span class="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full"
+              style="background: var(--green-light); color: var(--green);">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Drobne naprawy
+            </span>
+            <span class="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full"
+              style="background: var(--green-light); color: var(--green);">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Awaryjne odpalanie
+            </span>
+          </div>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="grid grid-cols-2 gap-4 reveal reveal-delay-2">
+          <div class="stat-card">
+            <p class="ticker mb-1">24<span style="font-size:1.5rem;">h</span></p>
+            <p class="text-sm text-gray-500 font-medium">Dostępność usług</p>
+          </div>
+          <div class="stat-card">
+            <p class="ticker mb-1">100<span style="font-size:1.5rem;">%</span></p>
+            <p class="text-sm text-gray-500 font-medium">Zadowolonych kierowców</p>
+          </div>
+          <div class="stat-card col-span-2" style="background: var(--ink); border-color: transparent;">
+            <p class="font-display text-4xl mb-1" style="color: #fde047;">AUTOLAWETA</p>
+            <p class="text-sm font-medium" style="color: rgba(255,255,255,0.55);">Bezpieczny i szybki transport pojazdów
+              osobowych i maszyn</p>
+          </div>
+          <div class="col-span-2" style="border-radius: 20px; overflow: hidden; border: 1px solid rgba(0, 0, 0, 0.07);">
+            <img src="galeria/5.png" alt="Pomoc Drogowa Krasne"
+              class="w-full h-56 md:h-64 lg:h-72 object-cover block" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     CENNIK
+════════════════════════════════════════════ -->
+  <section id="cennik" class="py-28 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-16 reveal">
+        <p class="section-eyebrow mb-4">Cennik Usług</p>
+        <h2 class="font-display text-5xl md:text-6xl leading-none">
+          PRZEJRZYSTY<br /><span style="color: var(--green);">CENNIK</span>
+        </h2>
+        <p class="mt-4 text-gray-500 max-w-md mx-auto">Zapewniamy konkurencyjne i transparentne ceny bez ukrytych opłat.
+          Ostateczna kwota zależy od trudności i pory zlecenia.</p>
+      </div>
+
+      <!-- Cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <!-- Card 1: Podstawowy -->
+        <div class="pricing-card reveal reveal-delay-1">
+          <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Holowanie na terenie miasta</p>
+            <p class="font-display text-5xl" style="color: var(--ink);">od 150</p>
+            <p class="text-sm font-medium mt-1 text-gray-400">PLN</p>
+          </div>
+
+          <div class="rounded-xl p-3 mb-6 flex items-center gap-2" style="background: var(--green-light);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8l3.5 3.5L13 4" stroke="#eab308" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p class="text-sm font-semibold" style="color: var(--green);">Szybki dojazd <strong><br>w 30 minut</strong>
+            </p>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Szybki dojazd na miejscu</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Bezpieczny załadunek</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Transport we wskazane miejsce</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Zgłoszenia 24/7</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Profesjonalna Autolaweta</span>
+            </li>
+          </ul>
+          <a href="tel:669146798" class="btn-primary w-full justify-center" style="background: var(--ink);">Zadzwoń po
+            pomoc →</a>
+        </div>
+
+        <!-- Card 2: Eksternistyczny -->
+        <div class="pricing-card reveal reveal-delay-2">
+          <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Holowanie na trasie</p>
+            <div class="flex items-baseline gap-2">
+              <p class="font-display text-5xl" style="color: var(--ink);">od 3</p>
+            </div>
+            <p class="text-sm font-medium mt-1 text-gray-400">PLN / km</p>
+          </div>
+
+          <div class="rounded-xl p-3 mb-6 flex items-center gap-2" style="background: #f3f4f6;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6" stroke="#9ca3af" stroke-width="1.5" />
+              <path d="M8 5v4M8 11v.5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <p class="text-sm text-gray-500">Wycena indywidualna na trasie</p>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Krótkie i dalekie dystanse</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Indywidualna wycena trasy</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Dostępność całą dobę</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Bezpieczny przewóz samochodów</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Profesjonalna Autolaweta</span>
+            </li>
+          </ul>
+          <a href="tel:669146798" class="btn-primary w-full justify-center" style="background: var(--ink);">Zadzwoń po
+            pomoc →</a>
+        </div>
+
+        <!-- Card 3: Grupowy — FEATURED -->
+        <div class="pricing-card featured reveal reveal-delay-3">
+          <div class="card-glow"></div>
+          <div class="absolute top-4 right-4">
+            <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style="background: rgba(253,224,71,0.2); color: #fde047;">Najlepsza cena</span>
+          </div>
+          <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color: rgba(255,255,255,0.4);">Trudny
+              Teren</p>
+            <div class="flex items-baseline gap-2">
+              <p class="font-display text-5xl text-white">od 200</p>
+            </div>
+            <p class="text-sm font-medium mt-1" style="color: rgba(255,255,255,0.4);">PLN / od trudności</p>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text">Wyciąganie aut z rowu</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text">Pomoc przy silnym zakopaniu</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text">Wyciąganie wyciągarką elektryczną</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text">Bezpieczne dla pojazdu</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text">Profesjonalna Autolaweta</span>
+            </li>
+          </ul>
+          <a href="tel:669146798" class="btn-primary w-full justify-center">Zadzwoń po pomoc →</a>
+        </div>
+
+        <!-- Card 4: Przyspieszony -->
+        <div class="pricing-card fast reveal reveal-delay-4">
+          <div class="absolute top-4 right-4">
+            <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style="background: rgba(234,179,8,0.12); color: var(--green);">Najszybszy wybór</span>
+          </div>
+          <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Awaryjne odpalanie</p>
+            <p class="font-display text-5xl" style="color: var(--ink);">od 100</p>
+            <p class="text-sm font-medium mt-1 text-gray-400">PLN</p>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Odpalanie z boostera (12V / 24V)</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Zmiana koła w aucie</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Dowóz paliwa do klienta</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Drobne naprawy na drodze</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span class="feature-text text-gray-600">Szybka, skuteczna pomoc</span>
+            </li>
+          </ul>
+          <a href="tel:669146798" class="btn-primary w-full justify-center">Zadzwoń po pomoc →</a>
+        </div>
+
+      </div>
+
+      <!-- Jazdy doszkalające -->
+      <div class="mt-10 reveal">
+        <div class="rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style="background: var(--green-light); border: 1px solid rgba(234,179,8,0.2);">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background: var(--green);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-base" style="color: var(--ink);">Transport maszyn</p>
+              <p class="text-sm text-gray-500 mt-0.5">Bezpieczny transport maszyn rolniczych, budowlanych i wózków
+                widłowych do 3.5t.</p>
+            </div>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-display text-3xl" style="color: var(--green);">Wycena Indywidualna</p>
+            <a href="tel:669146798" class="text-sm font-semibold underline" style="color: var(--green);">Zadzwoń po
+              pomoc →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     ZAPISY CTA STRIP
+════════════════════════════════════════════ -->
+  <section id="zapisy" class="py-24 px-6" style="background: var(--ink);">
+    <div class="max-w-3xl mx-auto text-center reveal">
+      <p class="section-eyebrow mb-4" style="color: #fde047;">Potrzebujesz pomocy?</p>
+      <h2 class="font-display text-5xl md:text-6xl leading-none text-white mb-6">
+        ZADZWOŃ PO<br /><span style="color: #fde047;">SZYBKĄ POMOC</span>
+      </h2>
+      <p class="text-gray-400 mb-10 text-lg max-w-xl mx-auto">Jesteśmy dostępni 24 godziny na dobę, 7 dni w tygodniu.
+        Skontaktuj się z nami, a my niezwłocznie wyślemy lawetę.</p>
+
+      <a href="tel:669146798" class="btn-primary text-xl px-10 py-5 pulse-btn inline-flex">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.46 1.18 2 2 0 012.44 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11l-1.27 1.27a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+        </svg>
+        669 146 798
+      </a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     KONTAKT + MAPA
+════════════════════════════════════════════ -->
+  <section id="kontakt" class="py-28 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-16 reveal">
+        <p class="section-eyebrow mb-4">Kontakt</p>
+        <h2 class="font-display text-5xl md:text-6xl leading-none">
+          ZNAJDŹ<br /><span style="color: var(--green);">NAS TUTAJ</span>
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+        <!-- Contact details -->
+        <div class="reveal space-y-6">
+          <div class="flex items-start gap-5">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background: var(--green-light);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.46 1.18 2 2 0 012.44 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11l-1.27 1.27a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-base mb-1">Telefon</p>
+              <a href="tel:669146798" class="text-2xl font-bold hover:opacity-70 transition-opacity"
+                style="color: var(--green);">669 146 798</a>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="flex items-start gap-5">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background: var(--green-light);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-base mb-1">Adres</p>
+              <p class="text-gray-600 text-lg">Krasne</p>
+              <p class="text-gray-400 text-sm mt-0.5">36-007 Krasne</p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="flex items-start gap-5">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background: var(--green-light);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-base mb-1">Dostępność</p>
+              <p class="text-gray-600">Pon – Niedz: 24h / 7</p>
+              <p class="text-gray-600">Święta i dni wolne: 24/7</p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="rounded-2xl p-5" style="background: var(--green-light); border: 1px solid rgba(234,179,8,0.2);">
+            <p class="font-semibold mb-1" style="color: var(--ink);">💡 Dostępni całą dobę</p>
+            <p class="text-sm text-gray-600">Zadzwoń o dowolnej porze - awarie zdarzają się niespodziewanie, dlatego my
+              czuwamy 24/7!</p>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-frame reveal reveal-delay-2" style="height: 400px;">
+          <iframe title="Mapa - Pomoc Drogowa Krasne" width="100%" height="100%" style="border:0;" loading="lazy"
+            allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=21.95,50.00,22.15,50.10&layer=mapnik&marker=50.05,22.05">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+  <footer class="py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center">
+          <img src="logo.png" alt="Prymus" class="h-8 w-auto" />
+        </div>
+
+        <p class="text-sm" style="color: rgba(255,255,255,0.35);">© 2025 Pomoc Drogowa Kacper Kempa. Wszelkie prawa
+          zastrzeżone.</p>
+
+        <div class="flex gap-6">
+          <a href="#o-nas" class="text-sm hover:text-white transition-colors" style="color: rgba(255,255,255,0.45);">O
+            nas</a>
+          <a href="#cennik" class="text-sm hover:text-white transition-colors"
+            style="color: rgba(255,255,255,0.45);">Cennik</a>
+          <a href="galeria.html" class="text-sm hover:text-white transition-colors"
+            style="color: rgba(255,255,255,0.45);">Galeria</a>
+          <a href="#kontakt" class="text-sm hover:text-white transition-colors"
+            style="color: rgba(255,255,255,0.45);">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+     JS
+════════════════════════════════════════════ -->
+  <script>
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Hamburger
+    const hamBtn = document.getElementById('ham-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamBtn.addEventListener('click', () => {
+      hamBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link, #mobile-menu .btn-primary').forEach(link => {
+      link.addEventListener('click', () => {
+        hamBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
